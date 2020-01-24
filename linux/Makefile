@@ -33,7 +33,7 @@ ifeq ($(build),debug)
 		-Wunknown-pragmas  -Wunreachable-code -Wunused \
 		-Wunused-function  -Wunused-label  \
 		-Wunused-value  -Wunused-variable \
-		-Wvolatile-register-var  -Wwrite-strings
+		-Wvolatile-register-var  -Wwrite-strings \
 	
 	# Disable some warnings
 	CXXFLAGS += -Wno-variadic-macros -Wno-unused-parameter -Wno-vla
@@ -47,10 +47,11 @@ endif
 
 ifeq ($(target),raspberry)
 	CXXFLAGS += -DRASPBERRY
-	LDFLAGS += -lwiringPi
+	LDFLAGS += -lwiringPi -lm
 endif
 
 SOURCES=main.cpp \
+        bme280.cpp \
 	../src/utility/BlynkDebug.cpp \
 	../src/utility/BlynkHandlers.cpp \
 	../src/utility/BlynkTimer.cpp
