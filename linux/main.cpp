@@ -36,7 +36,7 @@ BLYNK_WRITE(V1)
 {
     printf("Got a value for V%d: %s\n", V1, param[0].asStr());
     if(param[0].asInt() == 1){
-      system("/home/pi/scripts/door.sh");
+      system("/home/pi/my_raspi_home/scripts/door.sh");
     }
 }
 
@@ -44,7 +44,7 @@ BLYNK_WRITE(V3)
 {
     printf("Got a value for V%d: %s\n", V3, param[0].asStr());
     if(param[0].asInt() == 1){
-      system("/home/pi/scripts/fan.sh");
+      system("/home/pi/my_raspi_home/scripts/fan.sh");
     }
 }
 
