@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <wiringPiI2C.h>
 #include "bme280.h"
+#include "mh_z19.h"
 //#define BLYNK_DEBUG
 #define BLYNK_PRINT stdout
 #ifdef RASPBERRY
@@ -73,8 +74,17 @@ void bme280chart(){
   Blynk.virtualWrite(V22,  p);
 }
 
+void mhz19Chart(){
+  MHZ19 m("/dev/serial0");
+  int co2 = m.getCO2();
+  if(co2 != 0){
+    Blynk.virtualWrite(V23,  co2);
+  }
+}
+
 void myTimerEvent(){
   bme280chart();
+  mhz19Chart();
 }
 
 void setup()

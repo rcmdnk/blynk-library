@@ -52,6 +52,7 @@ endif
 
 SOURCES=main.cpp \
         bme280.cpp \
+        mh_z19.cpp \
 	../src/utility/BlynkDebug.cpp \
 	../src/utility/BlynkHandlers.cpp \
 	../src/utility/BlynkTimer.cpp
