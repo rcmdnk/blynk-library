@@ -35,18 +35,38 @@ BlynkTimer tmr;
 
 BLYNK_WRITE(V1)
 {
-    printf("Got a value for V%d: %s\n", V1, param[0].asStr());
-    if(param[0].asInt() == 1){
-      system("/home/pi/my_raspi_home/scripts/door.sh");
-    }
+  printf("Got a value for V%d: %s\n", V1, param[0].asStr());
+  if(param[0].asInt() == 1){
+    system("cocoro switch on");
+  }else if(param[0].asInt() == 0){
+    system("cocoro switch off");
+  }
+}
+
+BLYNK_WRITE(V2)
+{
+  printf("Got a value for V%d: %s\n", V2, param[0].asStr());
+  if(param[0].asInt() == 1){
+    system("cocoro humi on");
+  }else if(param[0].asInt() == 0){
+    system("cocoro humi off");
+  }
 }
 
 BLYNK_WRITE(V3)
 {
-    printf("Got a value for V%d: %s\n", V3, param[0].asStr());
-    if(param[0].asInt() == 1){
-      system("/home/pi/my_raspi_home/scripts/fan.sh");
-    }
+  printf("Got a value for V%d: %s\n", V3, param[0].asStr());
+  if(param[0].asInt() == 1){
+    system("cocoro mode recommendation");
+  }else if(param[0].asInt() == 2){
+    system("cocoro mode effective");
+  }else if(param[0].asInt() == 3){
+    system("cocoro mode auto");
+  }else if(param[0].asInt() == 4){
+    system("cocoro mode pollen");
+  }else if(param[0].asInt() == 5){
+    system("cocoro mode quiet");
+  }
 }
 
 void bme280chart(){
@@ -89,27 +109,27 @@ void myTimerEvent(){
 
 void setup()
 {
-    Blynk.begin(auth, serv, port);
-    tmr.setInterval(1000, myTimerEvent);
+  Blynk.begin(auth, serv, port);
+  tmr.setInterval(1000, myTimerEvent);
 
 }
 
 void loop()
 {
-    Blynk.run();
-    tmr.run();
+  Blynk.run();
+  tmr.run();
 }
 
 
 int main(int argc, char* argv[])
 {
-    parse_options(argc, argv, auth, serv, port);
+  parse_options(argc, argv, auth, serv, port);
 
-    setup();
-    while(true) {
-        loop();
-    }
+  setup();
+  while(true) {
+      loop();
+  }
 
-    return 0;
+  return 0;
 }
 
