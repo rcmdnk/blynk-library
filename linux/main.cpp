@@ -38,46 +38,46 @@ BlynkTimer tmr;
 BLYNK_WRITE(V1)
 {
   printf("Got a value for V%d: %s\n", V1, param[0].asStr());
-  char cmd[256];
+  string cmd = "cocoro switch ";
   if(param[0].asInt() == 1){
-    cmd = "cocoro switch on "
+    cmd += "on ";
   }else if(param[0].asInt() == 0){
-    cmd = "cocoro switch off "
+    cmd += "off ";
   }
-  strcat(cmd, COCORO_CONFIG);
-  system(cmd);
+  cmd += COCORO_CONFIG;
+  system(cmd.c_str());
 }
 
 BLYNK_WRITE(V2)
 {
   printf("Got a value for V%d: %s\n", V2, param[0].asStr());
-  char cmd[256];
+  string cmd = "cocoro humi ";
   if(param[0].asInt() == 1){
-    cmd = "cocoro humi on "
+    cmd += "on ";
   }else if(param[0].asInt() == 0){
-    cmd = "cocoro humi off "
+    cmd += "off ";
   }
-  strcat(cmd, COCORO_CONFIG);
-  system(cmd);
+  cmd += COCORO_CONFIG;
+  system(cmd.c_str());
 }
 
 BLYNK_WRITE(V3)
 {
   printf("Got a value for V%d: %s\n", V3, param[0].asStr());
-  char cmd[256];
+  string cmd = "cocoro mode ";
   if(param[0].asInt() == 1){
-    cmd = "cocoro mode recommendation "
+    cmd += "recommendation ";
   }else if(param[0].asInt() == 2){
-    cmd = "cocoro mode effective "
+    cmd += "effective ";
   }else if(param[0].asInt() == 3){
-    cmd = "cocoro mode auto "
+    cmd += "auto ";
   }else if(param[0].asInt() == 4){
-    cmd = "cocoro mode pollen "
+    cmd += "pollen ";
   }else if(param[0].asInt() == 5){
-    cmd = "cocoro mode quiet "
+    cmd += "quiet ";
   }
-  strcat(cmd, COCORO_CONFIG);
-  system(cmd);
+  cmd += COCORO_CONFIG;
+  system(cmd.c_str());
 }
 
 void bme280chart(){
