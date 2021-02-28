@@ -23,7 +23,7 @@
 #endif
 #include <BlynkSocket.h>
 #include <BlynkOptionsParser.h>
-#define COCORO_CONFIG "--config_file ~/.config/my_raspi_home/cocoro.yml"
+#define COCORO_CONFIG "--config_file /home/pi/config/my_raspi_home/cocoro.yml"
 
 static BlynkTransportSocket _blynkTransport;
 BlynkSocket Blynk(_blynkTransport);
