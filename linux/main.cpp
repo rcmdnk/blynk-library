@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include <wiringPiI2C.h>
 #include "bme280.h"
 #include "mh_z19.h"
@@ -22,6 +23,7 @@
 #endif
 #include <BlynkSocket.h>
 #include <BlynkOptionsParser.h>
+#define COCORO_CONFIG "--config_file ~/.config/my_raspi_home/cocoro.yml"
 
 static BlynkTransportSocket _blynkTransport;
 BlynkSocket Blynk(_blynkTransport);
@@ -36,37 +38,46 @@ BlynkTimer tmr;
 BLYNK_WRITE(V1)
 {
   printf("Got a value for V%d: %s\n", V1, param[0].asStr());
+  char cmd[256];
   if(param[0].asInt() == 1){
-    system("cocoro switch on");
+    cmd = "cocoro switch on "
   }else if(param[0].asInt() == 0){
-    system("cocoro switch off");
+    cmd = "cocoro switch off "
   }
+  strcat(cmd, COCORO_CONFIG);
+  system(cmd);
 }
 
 BLYNK_WRITE(V2)
 {
   printf("Got a value for V%d: %s\n", V2, param[0].asStr());
+  char cmd[256];
   if(param[0].asInt() == 1){
-    system("cocoro humi on");
+    cmd = "cocoro humi on "
   }else if(param[0].asInt() == 0){
-    system("cocoro humi off");
+    cmd = "cocoro humi off "
   }
+  strcat(cmd, COCORO_CONFIG);
+  system(cmd);
 }
 
 BLYNK_WRITE(V3)
 {
   printf("Got a value for V%d: %s\n", V3, param[0].asStr());
+  char cmd[256];
   if(param[0].asInt() == 1){
-    system("cocoro mode recommendation");
+    cmd = "cocoro mode recommendation "
   }else if(param[0].asInt() == 2){
-    system("cocoro mode effective");
+    cmd = "cocoro mode effective "
   }else if(param[0].asInt() == 3){
-    system("cocoro mode auto");
+    cmd = "cocoro mode auto "
   }else if(param[0].asInt() == 4){
-    system("cocoro mode pollen");
+    cmd = "cocoro mode pollen "
   }else if(param[0].asInt() == 5){
-    system("cocoro mode quiet");
+    cmd = "cocoro mode quiet "
   }
+  strcat(cmd, COCORO_CONFIG);
+  system(cmd);
 }
 
 void bme280chart(){
